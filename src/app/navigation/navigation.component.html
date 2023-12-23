@@ -8,7 +8,7 @@
 </nav>
 
 <nav class="sup-navigation">
-  <span appToolTipHover="animations">
+  <span [appToolTipHover]="animations">
     <span class="fa fa-superpowers"></span>
     <span [@counterChangeAnimation]="totalAnimations">{{ totalAnimations }}</span>
   </span>

@@ -1,0 +1,1 @@
+{"a":"// make sure to add @angular/animations package.json \n import {BrowserAnimationsModule}  from '@angular/platform-browser/animations'; @NgModule({ imports: [BrowserAnimationsModule]} class AppModule {}"}

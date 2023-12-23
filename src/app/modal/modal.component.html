@@ -1,6 +1,7 @@
 <div *ngIf="visible" [@modalAnimation]="status">
   <div class="overlay" @overlayAnimation (click)="hide()"></div>
   <div class="frame" @frameAnimation>
+    {{fileName}}
     <app-code-snippet *ngIf="fileName" [src]="fileName"></app-code-snippet>
   </div>
 </div>

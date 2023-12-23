@@ -1,5 +1,0 @@
-<!-- the prepare route function will prepare the animation state -->
-<div class="route-container" [@routeAnimations]="prepareRoute(outlet)">
-  <!-- the "outlet" here is passed into the prepareRoute function above -->
-  <router-outlet #outlet="outlet"></router-outlet>
-</div>
