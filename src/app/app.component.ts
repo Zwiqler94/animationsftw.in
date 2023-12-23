@@ -1,12 +1,13 @@
 import { ChangeDetectorRef, ViewChild, Component, HostBinding } from '@angular/core';
 import { Router, RouterOutlet, NavigationStart } from '@angular/router';
 import { CodeExampleService } from './code-example.service';
-import { trigger, transition, animate, style, query, group, state, animateChild } from '@angular/animations';
+// import { trigger, transition, animate, style, query, group, state, animateChild } from '@angular/platform-browser/animations';
 import { ModalEvent, ModalService } from './modal.service';
 import { ToolTipComponent } from './tool-tip/tool-tip.component';
 import { ModalComponent } from './modal/modal.component';
 import { ToolTipService, ToolTipEvent } from './tool-tip.service';
 import PHOTOS from './photos';
+import { trigger, transition, query, style, animate, group, animateChild } from '@angular/animations';
 
 const MIN_PAGE_TIMEOUT = 2000;
 const ELASTIC_BEZIER = 'cubic-bezier(.26,1.96,.58,.61)';
@@ -71,6 +72,7 @@ export class AppComponent {
   private _preloaded = false;
   private _timeoutDone = false;
   public percentage = 0;
+outlet: RouterOutlet;
 
   constructor(
     private _cd: ChangeDetectorRef,

@@ -32,12 +32,12 @@ import { ComponentType } from '../tool-tip.service';
   ]
 })
 export class ToolTipComponent {
-  typeString = ''
+  typeString = 'animations'
 
   public x: string|number;
   public y: string|number;
   public visible = false;
-  public type: ComponentType;
+  public type: ComponentType = ComponentType.ANIMATIONS;
   public types = ComponentType;
   private _element: any;
 

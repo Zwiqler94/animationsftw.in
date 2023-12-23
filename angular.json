@@ -48,18 +48,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "animation-movie:build"
+            "buildTarget": "animation-movie:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "animation-movie:build:production"
+              "buildTarget": "animation-movie:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "animation-movie:build"
+            "buildTarget": "animation-movie:build"
           }
         },
         "test": {

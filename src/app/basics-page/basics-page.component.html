@@ -22,15 +22,15 @@
       <div class="inner-section" [class.visible]="visibleSection==sections.triggers" (click)="onInnerSectionClick(sections.triggers)">
         <img src="/assets/design-images/car-1.jpg" />
         <div class="details">
-          <h2>@Triggers</h2>
+          <h2>&#64;Triggers</h2>
           <div class="item ">
-            Animations in Angular are linked using @trigger properties
+            Animations in Angular are linked using &#64;trigger properties
           </div>
           <div class="item ">
             When a property changes state (or the element is inserted/destroyed), it will trigger an animation
           </div>
           <div class="item ">
-            The @trigger is bound to the component (that's where the animation is defined)
+            The &#64;trigger is bound to the component (that's where the animation is defined)
           </div>
           <nav>
             <a href="" class="help-link" appCodeModalClick="/assets/code/template-triggers.example-html">View Code</a>
@@ -43,7 +43,7 @@
           <h2>Component Animations</h2>
           <div class="item ">
             Animations are placed within the
-            <a href="" class="help-link" appCodeModalClick="/assets/code/component-def.example-ts">@Component animations</a>
+            <a href="" class="help-link" appCodeModalClick="/assets/code/component-def.example-ts">&#64;Component animations</a>
           </div>
           <div class="item ">
             Triggers kick off transitions and a <a href="" class="help-link" appCodeModalClick="/assets/code/transition-def.example-ts">transition consists of animation steps</a>
@@ -92,15 +92,15 @@
       <div class="inner-section" [class.visible]="visibleSection==sections.animationCallback" (click)="onInnerSectionClick(sections.animationCallback)">
         <img src="/assets/design-images/nature-3.jpg" />
         <div class="details">
-          <h2>(@animation.callback)</h2>
+          <h2>(&#64;animation.callback)</h2>
           <div class="item ">
             When an animation starts and finishes it will <a href="" class="help-link" appCodeModalClick="/assets/code/animation-callback-def.example-ts">emit callbacks</a>
           </div>
           <div class="item ">
-            (@trigger.start) is called on start
+            (&#64;trigger.start) is called on start
           </div>
           <div class="item ">
-            (@trigger.done) when the animation completes
+            (&#64;trigger.done) when the animation completes
           </div>
           <div class="item ">
             An AnimationEvent is passed back via <a href="" class="help-link" appCodeModalClick="/assets/code/animation-callback-event.example-ts">$event in the callback</a>
@@ -112,10 +112,10 @@
 
   <ol class="menu menu-area">
     <li [class.selected]="isActive(sections.intro)" (click)="section=sections.intro">Angular Animations</li>
-    <li [class.selected]="isActive(sections.triggers)" (click)="section=sections.triggers">@Triggers</li>
+    <li [class.selected]="isActive(sections.triggers)" (click)="section=sections.triggers">&#64;Triggers</li>
     <li [class.selected]="isActive(sections.component)" (click)="section=sections.component">Component Animations</li>
     <li [class.selected]="isActive(sections.animateStyle)" (click)="section=sections.animateStyle">animate() and style()</li>
     <li [class.selected]="isActive(sections.insertionRemoval)" (click)="section=sections.insertionRemoval">Insertion / Removal</li>
-    <li [class.selected]="isActive(sections.animationCallback)" (click)="section=sections.animationCallback">(@animation.callback)</li>
+    <li [class.selected]="isActive(sections.animationCallback)" (click)="section=sections.animationCallback">(&#64;animation.callback)</li>
   </ol>
 </div>

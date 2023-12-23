@@ -1,25 +1,31 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { trigger, transition, style, animate } from '@angular/animations';
-import { AnimationCountService } from '../animation-count.service';
-import { AppComponent } from '../app.component';
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { trigger, transition, style, animate } from "@angular/animations";
+import { AnimationCountService } from "../animation-count.service";
+import { AppComponent } from "../app.component";
+import { ComponentType } from "../tool-tip.service";
 
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss'],
+  selector: "app-navigation",
+  templateUrl: "./navigation.component.html",
+  styleUrls: ["./navigation.component.scss"],
   animations: [
-    trigger('counterChangeAnimation', [
-      transition(':enter', []),
-      transition('* => *', [
+    trigger("counterChangeAnimation", [
+      transition(":enter", []),
+      transition("* => *", [
         style({ opacity: 0 }),
-        animate('300ms ease-out', style({ opacity: 1 }))
+        animate("300ms ease-out", style({ opacity: 1 })),
       ]),
-    ])
-  ]
+    ]),
+  ],
 })
 export class NavigationComponent {
-  constructor(private _router: Router, private _animationCount: AnimationCountService, private _parent: AppComponent) {}
+  animations: ComponentType = ComponentType.ANIMATIONS;
+  constructor(
+    private _router: Router,
+    private _animationCount: AnimationCountService,
+    private _parent: AppComponent
+  ) {}
 
   toggleDisableAnimations() {
     this._parent.toggleAnimations();
@@ -39,7 +45,7 @@ export class NavigationComponent {
 
   isActiveRoute(path: string) {
     if (path.length > 1) {
-      const regex = new RegExp('^' + path);
+      const regex = new RegExp("^" + path);
       return regex.test(this.activeRoutePath);
     }
     return path == this.activeRoutePath;

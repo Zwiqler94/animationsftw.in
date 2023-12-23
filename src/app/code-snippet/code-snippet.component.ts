@@ -1,30 +1,40 @@
-import { HostBinding, Input, ViewChild, Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import * as Prism from 'prismjs';
+import {
+  HostBinding,
+  Input,
+  ViewChild,
+  Component,
+  OnInit,
+} from "@angular/core";
+import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
+import * as Prism from "prismjs";
+import * as pretty from 'prettier';
+import * as parser from 'prettier/plugins/typescript';
+import * as estree from "prettier/plugins/estree";
 
-const DEFAULT_LANGUAGE = 'javascript';
+
+const DEFAULT_LANGUAGE = "javascript";
 
 function getFileNameExtension(fileName: string): string {
-  const dotIndex = fileName.lastIndexOf('.');
-  if (dotIndex <= 0) return '';
+  const dotIndex = fileName.lastIndexOf(".");
+  if (dotIndex <= 0) return "";
 
   const extName = fileName.substr(dotIndex + 1);
   return extName;
 }
 
 function resolveLanguageFromFileName(fileName: string) {
-  fileName = fileName.replace('.example-', '.');
+  fileName = fileName.replace(".example-", ".");
   const ext = getFileNameExtension(fileName).toLowerCase();
   switch (ext) {
-    case 'js':
-    case 'ts':
-    case 'javascript':
-      return 'javascript';
-    case 'css':
-      return 'css';
-    case 'htm':
-    case 'html':
-      return 'html';
+    case "js":
+    case "ts":
+    case "javascript":
+      return "javascript";
+    case "css":
+      return "css";
+    case "htm":
+    case "html":
+      return "html";
     default:
       return DEFAULT_LANGUAGE;
   }
@@ -52,18 +62,29 @@ export class CodeSnippetComponent implements OnInit {
   constructor(private _http: HttpClient) {}
 
   ngOnInit() {
+    console.log('jjj')
     let src = this.src;
+    console.log(src)
     this.status = "loading";
     if (src) {
+      console.log('here')
       this._http
-        .get(src)
-        .toPromise()
-        .then((response) => {
-          const language = resolveLanguageFromFileName(src);
-          this._updateContent(response.toString(), language);
+        .get(src, {
+          headers: new HttpHeaders().set(
+            "Accept",
+            "application/json; charset=utf-8"
+          ),
         })
-        .catch((e) => {
-          this.status = "error";
+        .subscribe({
+          next: async (response) => {
+            console.log("ABC");
+            const language = resolveLanguageFromFileName(src);
+            await this._updateContent((<any>response).a, language);
+          },
+          error: (e) => {
+            console.log(e);
+            this.status = "error";
+          },
         });
     } else {
       const language = this.language || DEFAULT_LANGUAGE;
@@ -73,10 +94,10 @@ export class CodeSnippetComponent implements OnInit {
     }
   }
 
-  private _processCode(code: string): {
+  private async _processCode(code: string): Promise<{
     metadata: { [key: string]: any };
     code: string;
-  } {
+  }> {
     const metadata: { [key: string]: any } = {};
     code = code.trim();
     if (code.substring(0, 3) === "---") {
@@ -92,7 +113,10 @@ export class CodeSnippetComponent implements OnInit {
     }
 
     return {
-      code: code.trim(),
+      code: await pretty.format(code.trim(), {
+        parser: "typescript",
+        plugins: [parser, estree],
+      }),
       metadata,
     };
   }
@@ -101,12 +125,13 @@ export class CodeSnippetComponent implements OnInit {
     this.classes = metadata["className"] || "";
   }
 
-  private _updateContent(input: string, language: string) {
+  private async _updateContent(input: any, language: string) {
+    console.log(input)
     this.status = "ready";
     const element = this.codeContainer.nativeElement;
-    const { code, metadata } = this._processCode(input);
+    const { code, metadata } = await this._processCode(input);
     this._processMetadata(metadata);
-    const text = Prism.highlight(code, Prism.languages[language]);
+    const text = Prism.highlight(code, Prism.languages[language], language);
     element.innerHTML = text;
   }
 }
