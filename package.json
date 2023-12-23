@@ -28,7 +28,7 @@
     "npm-font-open-sans": "^1.1.0",
     "prismjs": "^1.8.3",
     "rxjs": "^6.6.7",
-    "tslib": "^1.9.0",
+    "tslib": "^1.14.1",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {

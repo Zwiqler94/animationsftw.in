@@ -1,5 +1,5 @@
 import { HostBinding, Input, ViewChild, Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import * as Prism from 'prismjs';
 
 const DEFAULT_LANGUAGE = 'javascript';
@@ -31,36 +31,40 @@ function resolveLanguageFromFileName(fileName: string) {
 }
 
 @Component({
-  selector: 'app-code-snippet',
-  templateUrl: './code-snippet.component.html',
-  styleUrls: ['./code-snippet.component.scss'],
+  selector: "app-code-snippet",
+  templateUrl: "./code-snippet.component.html",
+  styleUrls: ["./code-snippet.component.scss"],
 })
 export class CodeSnippetComponent implements OnInit {
-  public classes: string = '';
+  public classes: string = "";
 
-  @ViewChild('code')
+  @ViewChild("code", { static: false })
   public codeContainer;
 
-  @Input('src')
+  @Input("src")
   public src: string;
 
-  @Input('language')
+  @Input("language")
   public language: string;
 
-  public status: 'default'|'ready'|'loading'|'error' = 'default';
+  public status: "default" | "ready" | "loading" | "error" = "default";
 
-  constructor(private _http: Http) {}
+  constructor(private _http: HttpClient) {}
 
   ngOnInit() {
     let src = this.src;
-    this.status = 'loading';
+    this.status = "loading";
     if (src) {
-      this._http.get(src).toPromise().then(response => {
-        const language = resolveLanguageFromFileName(src);
-        this._updateContent(response.text(), language);
-      }).catch(e => {
-        this.status = 'error';
-      });
+      this._http
+        .get(src)
+        .toPromise()
+        .then((response) => {
+          const language = resolveLanguageFromFileName(src);
+          this._updateContent(response.toString(), language);
+        })
+        .catch((e) => {
+          this.status = "error";
+        });
     } else {
       const language = this.language || DEFAULT_LANGUAGE;
       const element = this.codeContainer.nativeElement;
@@ -69,37 +73,40 @@ export class CodeSnippetComponent implements OnInit {
     }
   }
 
-  private _processCode(code: string): {metadata: {[key: string]: any}, code: string} {
-    const metadata: {[key: string]: any} = {};
+  private _processCode(code: string): {
+    metadata: { [key: string]: any };
+    code: string;
+  } {
+    const metadata: { [key: string]: any } = {};
     code = code.trim();
-    if (code.substring(0,3) === '---') {
+    if (code.substring(0, 3) === "---") {
       code = code.replace(/^---\s*(.*)?/, (_, capture) => {
-        if (capture[0] == '{' && capture[capture.length - 1] == '}') {
+        if (capture[0] == "{" && capture[capture.length - 1] == "}") {
           const json = JSON.parse(capture);
-          Object.keys(json).forEach(key => {
+          Object.keys(json).forEach((key) => {
             metadata[key] = json[key];
           });
         }
-        return '';
+        return "";
       });
     }
 
     return {
       code: code.trim(),
-      metadata
-    }
+      metadata,
+    };
   }
 
-  private _processMetadata(metadata: {[key: string]: any}) {
-    this.classes = metadata['className'] || '';
+  private _processMetadata(metadata: { [key: string]: any }) {
+    this.classes = metadata["className"] || "";
   }
 
   private _updateContent(input: string, language: string) {
-    this.status = 'ready';
+    this.status = "ready";
     const element = this.codeContainer.nativeElement;
-    const {code, metadata} = this._processCode(input);
+    const { code, metadata } = this._processCode(input);
     this._processMetadata(metadata);
-    const text = Prism.highlight(code,  Prism.languages[language]);
+    const text = Prism.highlight(code, Prism.languages[language]);
     element.innerHTML = text;
   }
 }

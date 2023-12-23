@@ -1,4 +1,4 @@
-import { ViewChild, HostBinding, Component } from '@angular/core';
+import { ViewChild, HostBinding, Component } from '@angular/core' ;
 import { PhotoScrubberComponent } from '../photo-scrubber/photo-scrubber.component';
 import { trigger, group, sequence, transition, state, style, animate, query, stagger, animateChild } from '@angular/animations';
 import { AnimationCountService } from '../animation-count.service';
@@ -9,32 +9,32 @@ const PAGE_ANIMATIONS = [
 ];
 
 @Component({
-  selector: 'app-builder-page',
-  templateUrl: './builder-page.component.html',
-  styleUrls: ['./builder-page.component.scss'],
+  selector: "app-builder-page",
+  templateUrl: "./builder-page.component.html",
+  styleUrls: ["./builder-page.component.scss"],
   animations: [
-    trigger('pageAnimations', [
-      transition(':enter', [
-        query('.left, .right, .design-image', [
-          style({ opacity: 0, transform: 'translateX(-50px)' }),
+    trigger("pageAnimations", [
+      transition(":enter", [
+        query(".left, .right, .design-image", [
+          style({ opacity: 0, transform: "translateX(-50px)" }),
           stagger(100, [
-            animate('0.5s ease-out', style({ opacity: 1, transform: 'none' }))
-          ])
-        ])
-      ])
+            animate("0.5s ease-out", style({ opacity: 1, transform: "none" })),
+          ]),
+        ]),
+      ]),
     ]),
-  ]
+  ],
 })
 export class BuilderPageComponent {
   position = 0;
 
-  @ViewChild('scrubber')
+  @ViewChild("scrubber", { static: false })
   public scrubber: PhotoScrubberComponent;
 
-  @HostBinding('@pageAnimations')
+  @HostBinding("@pageAnimations")
   public animatePage = true;
 
-  playerStatus = 'Play';
+  playerStatus = "Play";
 
   constructor(private _animationCount: AnimationCountService) {
     this._animationCount.specifyAnimations(PAGE_ANIMATIONS);
@@ -56,6 +56,6 @@ export class BuilderPageComponent {
     "/assets/gallery/7.jpg",
     "/assets/gallery/29.jpg",
     "/assets/gallery/10.jpg",
-    "/assets/gallery/28.jpg"
+    "/assets/gallery/28.jpg",
   ];
 }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { trigger, transition, animate, style, query, state, group, animateChild } from '@angular/animations';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 const NICE_EASING = 'cubic-bezier(0.35, 0, 0.25, 1)';
 
@@ -37,7 +37,7 @@ export class ModalComponent {
   public status: 'loading'|'ready' = 'loading';
   public fileName: string;
 
-  constructor(private _http: Http) { }
+  constructor(private _http: HttpClient) { }
 
   setDetails(codeFileName: string) {
     this.status = 'loading';

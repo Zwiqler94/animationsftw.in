@@ -16,7 +16,7 @@ export class ToolTipHoverDirective {
     this._element = element.nativeElement;
     this._element.addEventListener('mouseover', () => this.onEnter(this.type));
     this._element.addEventListener('mouseout', () => {
-      setTimeout(this.debounceTime, () => this.onLeave());
+      setTimeout(() => this.onLeave(), this.debounceTime);
     });
   }
 
