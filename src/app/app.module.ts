@@ -2,7 +2,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { CodeExampleService } from './code-example.service';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
@@ -63,7 +63,7 @@ import { ResourcesPageComponent } from './resources-page/resources-page.componen
     ResourcesPageComponent
   ],
   imports: [
-    HttpModule,
+    HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES)
