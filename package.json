@@ -28,7 +28,7 @@
     "font-awesome-sass": "^4.7.0",
     "normalize-scss": "^7.0.0",
     "npm-font-open-sans": "^1.1.0",
-    "prettier": "^3.1.1",
+    "prettier": "^3.2.5",
     "prismjs": "^1.8.3",
     "rxjs": "^6.6.7",
     "tslib": "^2.0.0",
