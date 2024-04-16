@@ -23,7 +23,7 @@
     "@angular/router": "^17.0.8",
     "@babel/parser": "^7.23.6",
     "@typescript-eslint/typescript-estree": "^6.15.0",
-    "core-js": "^3",
+    "core-js": "^3.36.1",
     "font-awesome": "^4.7.0",
     "font-awesome-sass": "^4.7.0",
     "normalize-scss": "^7.0.0",
