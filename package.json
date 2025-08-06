@@ -29,13 +29,13 @@
     "normalize-scss": "^7.0.0",
     "npm-font-open-sans": "^1.1.0",
     "prettier": "^3.1.1",
-    "prismjs": "^1.8.3",
+    "prismjs": "^1.30.0",
     "rxjs": "^6.6.7",
     "tslib": "^2.0.0",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.0.8",
+    "@angular-devkit/build-angular": "^20.1.5",
     "@angular/cli": "^17.0.8",
     "@angular/compiler-cli": "^17.0.8",
     "@angular/language-service": "^17.0.8",
